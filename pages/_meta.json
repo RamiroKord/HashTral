@@ -1,0 +1,15 @@
+{
+  "index": "Página inicial",
+  "another": "Another Page",
+  "advanced": "Advanced (A Folder)",
+  "about": {
+    "title": "Sobre nós",
+    "type": "page"
+  },
+  "contact": {
+    "title": "Fale com o autor ↗",
+    "type": "page",
+    "href": "https://x.com/astraltravellr",
+    "newWindow": true
+  }
+}

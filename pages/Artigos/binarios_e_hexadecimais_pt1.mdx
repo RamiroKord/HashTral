@@ -1,0 +1,378 @@
+---
+title: 'Números Binários: O Guia Completo para Entender Criptomoedas'
+author: 'Ramiro Kord (a.k.a. Astral Traveller)'
+publishedDate: '2025-09-29'
+lastRevisedDate: '2025-09-29'
+description: 'Guia completo e interativo sobre sistemas binários: aprenda como funcionam, por que são fundamentais para computadores e criptomoedas, com exemplos práticos e conversores.'
+---
+
+import Image from 'next/image'
+import AudioWord from '../../components/AudioWord'
+
+# Binários e Hexadecimais: O Guia Completo para Entender Criptomoedas (Parte 1 de 2: Binários)
+
+Autor: Astral Traveller ([&commat;AstralTravellr](http://www.x.com/astraltravellr))
+
+Colaboradores: Agent 101 ([&commat;IonicCulture](http://www.x.com/ionicculture));
+Midas Mulligan ([&commat;midas_mulligan3](http://www.x.com/midas_mulligan3));
+Nycazael ([&commat;Nycazael](http://www.x.com/nycazael))
+
+## Introdução
+
+Um dia desses, conversei com um amigo que me tem acompanhado num curso sobre os aspectos técnicos de criptomoedas, tais como blockchain e contratos inteligentes. Ele me disse: “Tive dificuldades para absorver toda a questão dos números hexadecimais. Vi um tal $\textrm{0x01AF}$ e pensei: 'O quê?'. Ainda bem que estamos na época do ChatGPT.”
+
+Amigo… Eu aprendi isso na disciplina de Eletrônica Digital no meu curso de Engenharia de Computação. Sim, sistemas numéricos tais como binários e hexadecimais fazem parte de algo que todos os alunos de ciência e engenharia da computação estudam em algum momento. E, no meu caso, está tão entranhado em minha cabeça que nem me ocorreu que é algo que pode não vir naturalmente para todas as pessoas.
+
+Pensando nisso, escrevo agora este guia que pretendo que seja exaustivo, porém em linguagem didática, e que explique a raiz de cada coisa no mundo dos sistemas numéricos comumente utilizados nas criptomoedas – o que nada mais é que uma aplicação de ciência da computação, que já lida com binários e hexadecimais há décadas.
+
+Porém, este artigo não é apenas um texto: ele é também uma experiência interativa em que eu vou apresentar a você os conceitos de maneira prática, com aplicações interativas programadas por mim mesmo. Meu propósito é fazer você ver na prática aquilo que está sendo apresentado, para que a teoria não fique tão pesada e a sua compreensão seja efetiva. Você pode até mesmo ignorar toda a teoria e ir direto para a [parte prática](#prática-com-binários), porém, na minha experiência como educador, as pessoas que obtêm o melhor aprendizado são aquelas que pelejam um pouquinho com a teoria antes de fazê-lo, mesmo que essa abordagem pareça mais difícil num primeiro momento.
+
+E, ainda, deixe-me pontuar que este trabalho está dividido em duas partes. No artigo de hoje, vamos tratar de binários. A segunda parte (que será publicada em 6 de outubro de 2025) será sobre hexadecimais e seu impacto na indústria de criptomoedas. 
+
+Se, em qualquer momento, você se deparou com todos aqueles estranhos números e letras (um tanto peculiares, as letras vão só até “f”!) em qualquer etapa ou processo do mundo cripto e ficou sem entender, este trabalho é para você. Vamos lá?
+
+## Decimais: A contagem humana por excelência
+
+Antes de mergulharmos nos sistemas que os computadores usam, é fundamental entendermos perfeitamente o sistema que nós usamos todos os dias: o **sistema decimal**, ou de base $10$. Por que usamos dez dígitos ($0, 1, 2, 3, 4, 5, 6, 7, 8, 9$)? *A resposta está na ponta de suas mãos.* A humanidade evoluiu contando com os dez dedos, e essa realidade biológica moldou a nossa forma de pensar sobre números.
+
+![Imagem: Seres humanos são "anatomicamente projetados" para contar de 1 até 10, e daí de 11 até 20, e assim por diante.](/contagem_humana.jpg)
+
+O sistema decimal é um sistema posicional. Isso significa que o valor de um dígito depende não apenas de qual dígito ele é, mas também de onde ele está posicionado no número.
+
+Pense no número $358$. Ele não é, simplesmente, a soma de $3 + 5 + 8$. Na verdade, ele representa:
+
+$3$ na posição das centenas ($10^2$, ou $100$);
+
+$5$ na posição das dezenas ($10^1$, ou $10$);
+
+$8$ na posição das unidades ($10^0$, ou $1$);
+
+Assim, o valor total é $(3×100)+(5×10)+(8×1)=358$.
+
+| Casa           | Centenas ($10^2$) | Dezenas ($10^1$) | Unidades ($10^0$) |
+|----------------|-------------------|------------------|-------------------|
+| **Algarismo**  | $3$                 | $5$                | $8$                 |
+| **Valor base** | $100$               | $10$               | $1$                 |
+| **Cálculo**    | $3 × 100 = 300$     | $5 × 10 = 50$      | $8 × 1 = 8$         |
+
+**Total: $300 + 50 + 8 = 358$**
+
+A cada vez que nos movemos uma posição para a esquerda, o valor daquela posição é multiplicado por $10$. Essa lógica de "base" e "posição" é o conceito-chave que nos permitirá entender todos os outros sistemas numéricos.
+
+O **sistema numérico binário** e o **sistema numérico hexadecimal** podem parecer estranhos à primeira vista, mas eles seguem exatamente a mesma regra, apenas trocando a "base $10$" por outras. Compreender o decimal não é apenas revisar a matemática lá da sua escolinha com a Tia Tânia; é estabelecer a fundação para tudo o que virá a seguir.
+
+## Números binários: O que são? Por que existem? Por que binários?
+
+<FloatImage 
+  src="/on_off.jpg" 
+  alt="Interruptor mostrando os estados ON (ligado) e OFF (desligado), que representam os dígitos 1 e 0 do sistema binário."
+  size="small"
+  position="left"
+  caption="ON e OFF: o fundamento do sistema binário."
+  className="wiki-image"
+/>
+
+Mesmo quando uma máquina exibe a você as imagens mais elaboradas e a sequência de interatividade mais complexa, se você fosse capaz de enxergar apenas os puros sinais dentro da máquina, você veria que é uma longa sequência temporal de apenas dois estados: ligado ou desligado.
+
+ON ou OFF. Zeros e Uns ($0$ e $1$), o que pode ser traduzido como Não ou Sim, Falso ou Verdadeiro. Normalmente, a convenção determina que $0$ representa o Não e o Falso; enquanto $1$ representa o Sim e o Verdadeiro.
+
+Por que apenas dois estados possíveis? Tudo remonta à obra de engenharia elétrica, que compreende pulsos. Os pulsos elétricos podem vir como um de mais alta tensão (Um) ou um de mais baixa tensão (Zero) ao longo do tempo.[^boole-shannon]
+
+<div className="clear-float"></div>
+
+### O pulso digital
+
+A variação da rede elétrica pode causar flutuações na tensão de alimentação de um circuito. No entanto, o sistema eletrônico é projetado para lidar com isso, interpretando os sinais não como valores exatos, mas como faixas de tensão.
+
+Vamos estabelecer que $V$ é "Volts", a unidade física para tensão elétrica. Assim sendo, um pulso alto ($1$ lógico) pode ter um valor nominal de $5V$, mas é reconhecido como qualquer tensão dentro de uma faixa específica, que varia dependendo da tecnologia: por exemplo, em circuitos TTL (Transistor-Transistor Logic), o $1$ lógico é entre $2V$ e $5V$, enquanto o $0$ lógico é entre $0V$ e $0,8V$; já em CMOS (Complementary Metal-Oxide-Semiconductor), as faixas podem ser mais amplas, como $0V$ a $1,5V$ para $0$ e $3,5V$ a $5V$ para $1$, dependendo da voltagem de operação.
+
+Veja, abaixo, um gráfico representando as tensões aceitas para dígitos binários em um dispositivo CMOS:
+
+![Gráfico: Pulsos elétricos representando os sinais de bits.](/binario_niveis_grafico.png)
+
+O gráfico acima ilustra o conceito de um pulso digital, representando os níveis lógicos $0$ e $1$ em função da tensão elétrica ao longo do tempo. Ele é comum em eletrônica digital para demonstrar como sinais binários são interpretados em circuitos lógicos, como em portas lógicas.
+
+A linha azul representa o sinal digital real. É uma onda quadrada (ou pulso retangular) que se alterna entre dois níveis de tensão, formando uma sequência binária aproximada de $1 0 1 0 1 …$, com períodos de $1$ unidade de tempo por estado.
+
+A faixa sombreada em verde representa a faixa de tensão onde o circuito lógico interpreta o sinal como $1$ lógico. A faixa sombreada em vermelho representa a faixa de tensão onde o circuito lógico interpreta o sinal como $0$ lógico.
+
+A área branca (não sombreada) está localizada entre as faixas vermelha e verde. Essa região representa a zona de transição indefinida ou faixa proibida nos níveis lógicos digitais. Nessa faixa, o sinal não é claramente interpretado como $0$ nem como $1$. Circuitos lógicos (como portas $E$, $OU$ etc.) podem comportar-se de forma imprevisível se a entrada estiver nessa região: por exemplo, oscilações, estados metastáveis ou saídas erráticas.
+
+O propósito dessa separação é fornecer margens de ruído. Em sistemas reais, sinais podem sofrer interferências (ruído elétrico, *crosstalk*, variações de temperatura), e essa zona branca garante que pequenas flutuações não causem erros de interpretação.
+
+No gráfico que eu criei para você mostrando o funcionamento de um dispositivo CMOS, o sinal digital (linha azul) nunca permanece nessa área branca; ele transita rapidamente através dela durante as mudanças de estado, o que é ideal para operação confiável. Se o sinal ficasse preso nessa região (por exemplo, devido a um mau projeto), o sistema poderia falhar.
+
+### O transistor
+
+A escolha de apenas dois estados ($0$ e $1$) não é arbitrária. Ela está diretamente ligada à confiabilidade e à simplicidade da eletrônica.
+
+Pense em um interruptor de luz em sua casa: ele tem apenas duas posições estáveis e fáceis de identificar, ligado (ON) ou desligado (OFF). Tentar criar um interruptor com dez posições diferentes exigiria uma precisão mecânica enorme, seria mais caro, mais propenso a falhas e, em um sistema complexo com bilhões deles, o erro seria inevitável.
+
+<FloatImage 
+  src="/transistores.jpg" 
+  alt="Transistores"
+  size="small"
+  position="left"
+  caption="Transistores são os pequenos interruptores responsáveis pelo funcionamento físico do sistema binário na computação."
+  className="wiki-image"
+/>
+
+No mundo da eletrônica, os transistores [^transistores] funcionam como esses interruptores minúsculos. Eles são incrivelmente eficientes em distinguir apenas dois estados: um estado onde a corrente flui (ON) e outro onde não flui (OFF).
+
+A ampla margem entre as faixas de $0$ e $1$ é o que torna o sistema robusto. Uma pequena variação de voltagem causada por ruído ou interferência não altera o estado lógico. Um pulso de $5,1V$ ainda será lido como um $1$, e um de $0,2V$ ainda será lido como um $0$. A margem de erro é generosa.
+
+Por isso, o sistema binário com apenas dois estados é fundamentalmente confiável e resistente a interferências, permitindo que os bilhões de transistores em um processador trabalhem em conjunto de forma precisa e sem erros. É simples, otimizado em recursos e funcional. Por isso, o binário é a língua mãe de todo o hardware moderno, do microcontrolador mais simples até o mais poderoso servidor que seja coluna vertebral de uma rede de blockchain.
+
+<div className="clear-float"></div>
+
+## Como contar em binários
+
+Você pode pensar: "Se o sistema binário só tem os algarismos $0$ e $1$, ele parece bem limitado, certo?"
+
+Essa é uma observação inteligente e a chave para entender como os computadores funcionam. A verdade é que o sistema binário pode representar qualquer número, assim como o nosso sistema decimal (de $0$ a $9$) faz.
+
+Pode parecer que usar apenas $0$ e $1$ é limitante, mas o segredo está em combinar os dígitos em mais posições, assim como fazemos no sistema decimal.
+
+Pense nisto: nosso sistema decimal usa os dígitos de $0$ a $9$. Para representar um número como "duzentos e cinquenta e cinco", não inventamos um novo símbolo. Nós usamos três posições de dígitos ($2$, $5$ e $5$) para compor o valor total.
+
+O sistema binário faz exatamente a mesma coisa. Para representar números maiores que $1$, ele simplesmente adiciona mais posições à esquerda.
+
+Vamos contar juntos em binário [^leading-zeros]:
+
+$000$ (é o zero);
+
+$001$ (é o um);
+
+$010$ (é o dois);
+
+$011$ (é o três);
+
+$100$ (é o quatro) ...
+
+Atenção: É importante lembrar que "10" em binário não se lê como "dez", mas como "um-zero". Ele representa a quantidade que chamamos de "dois". Dessa forma, ao adicionar mais e mais dígitos, qualquer número que você imaginar pode ser escrito em binário.
+
+Visualize abaixo:
+
+<div style={{ textAlign: 'center', margin: '2rem 0' }}>
+  <Image 
+    src="/binarios_animado.gif" 
+    alt="Animação mostrando a contagem progressiva em números binários de 0000 a 1111."
+    width={500}
+    height={300}
+    unoptimized
+  />
+</div>
+
+
+A animação acima apresenta a contagem em binários do zero até $1111$ (em decimais, 15). Observe que o $0$ que muda para $1$ é sempre colorido em vermelho; o $1$ que muda para $0$ é colorido em azul. Para construir sua compreensão, eu sugiro que você mentalize, com a voz de sua mente, a contagem em decimal a cada vez que o binário acima aumenta em um. Conte: um, dois, três, quatro, cinco...
+
+Apenas lembre-se de que a melhor prática quando se menciona um número binário é não contar como "um, dois, três, quatro" (como eu acabei de indicar por razões puramente didáticas), mas lendo a sequência de zeros e uns. "Zero", "zero-um", "um-zero", "um-um"... [^contagem_bin]
+
+### De binários para decimais
+
+Eu iniciei esta seção pensando em familiarizar você a toda a ideia de contagem em binários. Como dizia em sala de aula o meu caríssimo professor [Adalbery Castro](https://www.youtube.com/@adalbery), “se vocês serão bons engenheiros de computação, é importante que a contagem em binários seja uma segunda natureza para vocês, que ela esteja tão entranhada em suas mentes quanto está a contagem de 0 a 9, e que ao bater o olho em um, sei lá, $0110$… vocês consigam dizer imediatamente que se trata da quantidade seis”.
+
+Entendo que a maioria que lerá este artigo não será um engenheiro ou cientista da computação e só quer entender melhor os binários e hexadecimais. De qualquer maneira, agora que você teve um primeiro contato com esse conteúdo, está na hora de você saber que essa coisa toda – a **conversão de decimais para binários** – está sistematizada por uma regra matemática bem definida.
+
+Qual seja, cada dígito do número binário é definido por uma potência de $2$. *Cada dígito do número binário é definido por $2^n$.*
+
+A contagem começa da direita para a esquerda, a partir da potência $2^0$.
+
+O primeiro dígito à direita é $2^0$ (ou simplesmente = $1$).
+
+O segundo dígito (um passo para a esquerda) é $2^1$ ($= 2$).
+
+O terceiro é $2^2$ ($= 4$), e assim por diante.
+
+Isso significa que, a cada dígito que você se move para a esquerda, o expoente da potência de $2$ aumenta em $1$. Se um número binário tem $6$ dígitos, por exemplo, o primeiro dígito do número (o que está mais à esquerda) terá o valor de $2^5$.
+
+Ou, em outras palavras: lembra-se de como, no sistema decimal, a cada passo que damos para um dígito à esquerda, multiplicamos o peso do dígito por dez? Aqui, a cada passso que damos para a esquerda, multiplicamos o peso do dígito por dois. E, ao final, devemos somar todas as multiplicações que obtivemos.
+
+### Prática com binários
+
+<span style={{fontSize: '0.7em', color: '#666'}}>[Quis pular? Volte para Introdução.](#introdução)</span>
+
+Agora, você se lembra de como nós dissemos que a máquina, em seu nível mais baixo, só entende a linguagem de “acender” ou “apagar” interruptores? Assim é como ela, igualmente, entende os números. Você quer representar um determinado número? Então saiba exatamente quais dígitos “acender” (isto é, transformar em 1), e quais “apagar” (isto é, manter como zero).
+
+Deixamos para você, abaixo, um quadro interativo para você brincar e se familiarizar: 
+
+import BinaryDecimalConverter from '../../components/binary-decimal-converter'
+
+<BinaryDecimalConverter />
+
+### De decimais para binários
+
+Para **converter um número decimal para binário** de forma sistemática, você pode usar o método de divisão sucessiva por $2$. Aqui vai o passo a passo:
+
+1. Divida o número decimal por $2$ e anote o resto (que será $0$ ou $1$).
+
+2. Pegue o quociente inteiro da divisão e repita o processo, isto é, divida o quociente por $2$.
+
+3. Continue até que o quociente seja $1$.
+
+4. O número binário é lido pelos restos, de baixo para cima (o último resto é o dígito mais significativo).
+
+Por exemplo, suponha que queiramos converter 180 do decimal para o binário.
+
+$180 / 2 = 90$, resto $0$;
+
+$90 / 2 = 45$, resto $0$;
+
+$45 / 2 = 22$, resto $1$;
+
+$22 / 2 = 11$, resto $0$;
+
+$11 / 2 = 5$, resto $1$;
+
+$5 / 2 = 2$, resto $1$;
+
+$2 / 2 = 1$, resto $0$.
+
+Lemos os restos de baixo para cima, sendo que o primeiro dígito sempre será 1, de maneira que:
+
+$180_{10}$ = $10110100_2$.
+
+Abaixo, colocamos uma animação representando o processo de conversão que foi descrito acima:
+
+<div style={{ textAlign: 'center', margin: '2rem 0' }}>
+  <Image 
+    src="/180_binario.gif" 
+    alt="Conversão de 180 da base decimal para binário."
+    width={350}
+    height={350}
+    unoptimized
+  />
+</div>
+
+
+### Números negativos em binários
+
+Até agora, todos os números que vimos são considerados "não assinados" (_unsigned_), ou seja, apenas positivos. Mas como um computador representa o número $−5$, por exemplo? A primeira ideia que pode vir à mente seria usar o primeiro bit (o mais à esquerda) como um sinal: $0$ para positivo e $1$ para negativo.
+
+Essa abordagem, chamada de "sinal e magnitude", funciona, mas traz dois problemas para os engenheiros: primeiro, teríamos duas representações para o zero ($00000000$ e $10000000$, um $+0$ e um $-0$); segundo, exigiria a criação de circuitos eletrônicos separados para somar e subtrair, o que é ineficiente.
+
+Para resolver isso, o grande pioneiro da arquitetura de computadores John von Neumann criou um sistema engenhoso chamado **complemento de dois**. Ele não só resolve o problema do zero duplo como, de quebra, transforma a subtração em uma simples adição.
+
+Nesse sistema, o bit mais à esquerda (MSB, _most significant bit_) ainda nos diz o sinal ($0$ para positivo, $1$ para negativo), mas o valor é codificado de uma maneira especial. Vamos ver como representar $−5$ em um sistema de $8$ bits:
+
+1. **Comece com o número positivo.** Primeiro, pegamos o valor positivo de $5$. Em $8$ bits, ele é:
+
+$5_{10}→00000101_2$
+
+2. **Inverta todos os bits (Complemento de Um).** Agora, trocamos todos os $0$s por $1$s e todos os $1$s por $0$s.
+
+$00000101→11111010$
+
+3. **Adicione $1$ ao resultado (Complemento de Dois).** Por fim, somamos 1 ao número invertido.
+
+$11111010+1=11111011$
+
+Pronto! Em um sistema de $8$ bits usando complemento de dois, a sequência $11111011$ é a representação de $−5$.
+
+Os negativos são importantes pelas razões que vamos detalhar abaixo.
+
+O algoritmo que garante que só você pode movimentar seus fundos (em Bitcoin, Ethereum e muitas outras redes) é o ECDSA. A matemática por trás dele envolve operações com curvas elípticas sobre campos finitos. Embora os resultados finais (a assinatura $\textrm{r}$ e $\textrm{s}$) sejam números positivos, os cálculos intermediários para gerar e verificar essas assinaturas, especialmente o cálculo de inversos modulares (usando algoritmos como o Euclidiano Estendido), dependem fundamentalmente de uma aritmética que possa lidar com valores que, conceitualmente, são negativos.
+
+O complemento de dois é a forma como o processador executa essa matemática de forma eficiente. Sem entender como os números com sinal funcionam no nível do hardware, a implementação desses algoritmos criptográficos se torna uma caixa-preta.
+
+### Limitações do binário em escala
+
+Embora o binário seja poderoso, ele tem limitações. Em um número fixo de bits (ex.: $8$ bits), o máximo é $11111111$ ($255$ decimal). Se você somar $1$, ocorre _overflow_ (transbordamento), voltando a $00000000$, o que pode causar erros em cálculos. Em criptomoedas, isso é crítico: chaves com poucos bits são vulneráveis a ataques de força bruta.
+
+Além disso, para números fracionários, usamos representações como ponto flutuante (IEEE 754), mas isso introduz perdas de precisão em operações, o que pode afetar contratos inteligentes ou transações precisas.
+
+Em vez disso, as criptomoedas utilizam representações inteiras com subunidades fixas para evitar esses problemas. Por exemplo, no Bitcoin, todas as quantias são armazenadas como inteiros em satoshis ($1$ BTC = $100.000.000$ satoshis). O ponto decimal é ajustado apenas na interface do usuário. No Ethereum, usa-se wei ($1$ ETH = $10^{18}$ wei), também como inteiros.
+
+## Bits e bytes
+
+Você entendeu a lógica dos binários. Você sabe que o computador representa, digamos, o número $255$ como $11111111$ (não precisa acreditar em mim, faça este número no conversor!). Oito bits, *oito dígitos binários*, todos acesos em $1$, para representar a quantia $255$. Simples, não?
+
+Agora, deixe-me explicar o que é um <AudioWord word="bit" audioSrc="/audio/bit.mp3" /> e o que é um <AudioWord word="byte" audioSrc="/audio/byte.mp3" />.
+
+Imagine o endereço de uma carteira de criptomoedas (ou ainda um hash SHA-256), que é um número gigantesco. Em binário, ele seria algo como:
+
+100110110100011101010111011100... (e isso continuaria por muitas linhas).
+
+Tente ler isso. Tente ditar para um amigo. Tente encontrar um erro no meio dessa sopa de 0s e 1s. É impossível, impraticável e um convite ao desastre. Os primeiros cientistas da computação perceberam rapidamente o seguinte: o sistema binário é perfeitamente eficiente para máquinas, mas é profundamente ineficiente para a cognição humana.
+
+Para lidar com essa complexidade, os cientistas da computação elaboraram ferramentas matemáticas. Uma delas é o **byte**. Uma outra, ainda, é a **notação hexadecimal**.
+
+O byte consiste em se agrupar bits em uma unidade padronizada. O byte, portanto, é uma sequência de 8 bits.
+
+O byte é a unidade de memória padrão, endereçável em praticamente todos os sistemas de computação modernos. Estruturas de dados, endereços de memória, saídas criptográficas e protocolos de rede são quase universalmente projetados em torno de limites de bytes.
+
+Veja um exemplo de como estruturar bits em conjuntos de bytes:
+
+`10110001 11010010 00101110 11110000` <br/> `01001101 10101011 11001000 01110110` <br/> `00110100 11101001 10010001 01011010` <br/> `11110011 00001111 10111000 10001000`
+
+Para exemplificar a relevância dos bytes em nosso contexto de criptomoedas, saiba disto: um hash SHA-256 tem $32$ bytes ($256$ bits), e uma chave privada padrão também tem $32$ bytes. Essa arquitetura centrada em bytes é uma restrição crítica e inegociável que determina como os dados são estruturados e tratados em um nível baixo.
+
+## Difícil? Não esquente!
+
+Se você não entendeu algumas coisas, não se assuste. Há muitas coisas que eu mencionei que são inteiramente outras áreas do estudo e construção de criptomoedas, para além dos sistemas de numeração. O último parágrafo é um grande exemplo de como estamos pisando em território novo para muita gente, já que ele trata das áreas de algoritmos criptográficos e cybersegurança de criptomoedas.
+
+Vamos abordar esse mundo e outros com maiores detalhes aqui em **HashTral** em ocasiões futuras. Estou desde já introduzindo esses assuntos também para todos saberem que o que estamos discutindo aqui não é um mundo teórico matemático apartado da prática técnica com criptomoedas.
+
+De qualquer maneira, sabe quem chegou ao Brasil fazendo um trabalho sensacional sobre todos os aspectos mais técnicos do mundo cripto para que você não precise se preocupar com nada? A [Coins.xyz](https://www.coins.xyz/en/register?invite_code=2000647282118095360&broker=9010), com uma equipe experiente e inovadora, liderada por profissionais com background em grandes players do setor cripto.
+
+Usar a **Coins** é muito fácil, você pode usar no seu computador, você pode baixar o aplicativo em seu smartphone, você pode mandar o que quiser para quem quiser, a hora que quiser. É Bitcoin, é Ethereum, é Solana, são as stablecoins, é o que você quiser. Fácil e instantâneo, com segurança e conformidade regulatória comprovadas globalmente, atendendo a mais de 18 milhões de usuários em mais de 100 países. É qualidade testada e aprovada por **HashTral**.
+
+## No próximo artigo...
+
+Vamos continuar os assuntos **Sistemas Numéricos** no próximo artigo de **HashTral**. A segunda parte tratará dos números hexadecimais, cuja plena compreensão está intimamente ligada à compreensão dos números binários. Essa parte seguinte será publicada em 6 de outubro, daqui a uma semana.
+
+Eu também preciso anunciar que estamos [aceitando sugestões](mailto:ramirokord@gmail.com) de quais assuntos tratar em nossos próximos artigos interativos. Mande um e-mail para [ramirokord@gmail.com](mailto:ramirokord@gmail.com) com o assunto "Sugestão Artigo". Ou, alternativamente, encontre-me no X: [&commat;AstralTravellr](http://www.x.com/astraltravellr). Eu leio todas as mensagens!
+
+Obrigado pela leitura... e até a segunda parte!
+
+## Perguntas Frequentes (FAQ)
+
+Aqui estão algumas perguntas e respostas para ajudar a esclarecer os conceitos abordados no artigo:
+
+1. **O que é um sistema numérico binário?**
+
+O sistema binário é um sistema de numeração que utiliza apenas dois dígitos: 0 e 1. Ele é a linguagem fundamental dos computadores e da eletrônica digital, representando estados como ligado/desligado (ON/OFF).
+
+2. **Por que os computadores usam binários e não decimais?**
+
+Os transistores, que são os "interruptores" minúsculos dentro dos computadores, são extremamente eficientes em distinguir apenas dois estados: corrente fluindo (ON, ou 1) ou não fluindo (OFF, ou 0). Isso torna o sistema binário muito mais confiável, simples e resistente a interferências do que tentar criar um sistema com dez estados para cada "interruptor".
+
+3. **Como o sistema binário pode representar qualquer número se só usa 0 e 1?**
+
+Assim como o sistema decimal usa posições para representar números maiores (ex: $358$ é $3×10^2+5×10^1+8×10^0$), o sistema binário faz o mesmo, mas com potências de $2$. Cada dígito em binário representa uma potência de $2$, começando com $2^0$ à direita e aumentando para a esquerda. Por exemplo, $100_2$ é $1×2^2+0×2^1+0×2^0=4_{10}$.
+
+4. **Como converter um número decimal para binário?**
+
+Para converter um número decimal para binário, você pode usar o método de divisão sucessiva por $2$. Divida o número por $2$, anote o resto, e continue dividindo o quociente por $2$ até que o quociente seja $1$. O número binário é formado pelos restos lidos de baixo para cima, incluindo o último quociente (que será sempre $1$). Por exemplo, $180_{10}$ é convertido para $10110100_2$.
+
+5. **Como números negativos são representados em binário?**
+
+Computadores usam o sistema de "complemento de dois" para representar números negativos. Essa abordagem resolve problemas de ter duas representações para o zero e permite que a subtração seja tratada como adição. Para converter um número positivo para sua representação negativa em complemento de dois, inverte-se todos os bits e depois soma-se $1$ ao resultado.
+
+6. **Qual a importância dos binários para criptomoedas?**
+
+Os binários são a base de toda a computação, e as criptomoedas são construídas sobre princípios de ciência da computação. Algoritmos criptográficos, como o ECDSA (usado no Bitcoin e Ethereum para garantir que você possa movimentar seus fundos), dependem de operações matemáticas que são executadas eficientemente pelos processadores em binário, inclusive com a manipulação de números negativos via complemento de dois.
+
+7. **O que são "bits" e "bytes"?**
+
+Um bit é a menor unidade de informação em um sistema binário, representando um $0$ ou $1$. Um byte é um agrupamento padronizado de $8$ bits. Bytes são cruciais para a forma como os dados são estruturados e tratados em sistemas de computação, incluindo as criptomoedas. Por exemplo, um hash SHA-256 e uma chave privada padrão têm $32$ bytes ($256$ bits).
+
+8. **Por que o artigo está dividido em duas partes?**
+
+Este artigo foca nos binários. A segunda parte, que será publicada em 6 de outubro de 2025, abordará os números hexadecimais e sua relação com a indústria de criptomoedas.
+
+Se você deseja aprender mais, o artigo oferece um conversor interativo de binários para decimais para você praticar.
+
+O artigo foi escrito por Astral Traveller ([&commat;AstralTravellr](http://www.x.com/astraltravellr)) e publicado em 29 de setembro de 2025.
+
+## Notas de rodapé
+
+[^boole-shannon]: Tal simplicidade remonta às contribuições históricas de figuras como [George Boole](https://wiki.inf.ufpr.br/computacao/doku.php?id=g:george_boole), que desenvolveu a álgebra booleana no século XIX, fundamentando a lógica binária, e [Claude Shannon](https://mentalidadesmatematicas.org.br/claude-elwood-shannon-conheca-o-pai-da-teoria-da-informacao/), que no século XX aplicou essa lógica à teoria da informação e circuitos elétricos, pavimentando o caminho para a computação moderna.
+
+[^contagem_bin]: Ler binários como sequências de dígitos ("zero", "zero-um", "um-zero", "um-um") em vez de nomes decimais é uma prática comum e recomendada em contextos educacionais ou técnicos. Evita confusão, especialmente ao discutir números binários verbalmente
+
+[^ethereum-case]: Caso você esteja se perguntando, as letras maiúsculas e minúsculas no endereço Ethereum que eu mostrei são uma aplicação de verificação de erros ao se fazer transferência de dinheiro, mas você não precisa saber disso agora, não para os fins deste artigo. (linkar algum artigo que trate especificamente disso)
+
+[^leading-zeros]: Note que zeros à esquerda, chamados de *leading zeros*, não alteram o valor do número, servindo apenas para padronizar o comprimento.
+
+[^transistores]: Eu nunca irei cansar de recomendar o [curto documentário](https://youtu.be/V9xUQWo4vN0) histórico, produzido nos anos 1950, sobre transistores. Ele é tão presciente sobre vários acontecimentos que é bastante curioso. Se você o assistir, quando chegar à parte em que eles mencionam pequenos computadores que poderiam ocupar "apenas" pequenas salas, pense em quão longe nós chegamos, considerando-se de que talvez você esteja me lendo diretamente de um computador de palma de mão chamado *smartphone*.

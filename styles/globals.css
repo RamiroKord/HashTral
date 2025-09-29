@@ -1,0 +1,26 @@
+/* styles/globals.css */
+
+/* Estilos para notas de rodapé */
+.footnotes {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e5e7eb;
+  font-size: 0.875rem; /* Fonte menor que o texto principal */
+}
+.footnotes ol {
+  padding-left: 1.5rem;
+}
+.footnotes li {
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+}
+/* Dark mode */
+.dark .footnotes {
+  border-top-color: #374151;
+}
+.dark .footnotes::before {
+  color: #f9fafb;
+}
+
+/* Import the float image styles */
+@import './float-image.css';
