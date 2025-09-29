@@ -77,12 +77,12 @@ const BinaryDecimalConverter = () => {
                 }}
                 onMouseOver={(e) => {
                   if (bit === 0) {
-                    e.target.style.backgroundColor = '#f3f4f6';
+                    e.currentTarget.style.backgroundColor = '#f3f4f6';
                   }
                 }}
                 onMouseOut={(e) => {
                   if (bit === 0) {
-                    e.target.style.backgroundColor = '#f9fafb';
+                    e.currentTarget.style.backgroundColor = '#f9fafb';
                   }
                 }}
               >
